@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>集いしもの達</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { 
+            font-family: 'Inter', 'Noto Sans JP', sans-serif; 
+        }
+        .content-panel { 
+            display: none; 
+        }
+        .content-panel.active { 
+            display: block; 
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        /* スクロールバーのスタイル */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white border-r border-slate-200 flex flex-col">
+            <div class="p-6 border-b border-slate-200">
+                <h1 class="text-2xl font-bold text-indigo-600">Re:Start</h1>
+                <p class="text-sm text-slate-500 mt-1">Web Application</p>
+            </div>
+            <nav id="main-nav" class="flex-1 p-4 space-y-2">
+                <a href="#" onclick="navigate('home')" class="nav-link active flex items-center px-4 py-2.5 text-slate-700 bg-indigo-50 rounded-lg font-semibold">
+                    <i data-lucide="home" class="w-5 h-5 mr-3 text-indigo-600"></i>
+                    <span>ホーム</span>
+                </a>
+                <a href="#" onclick="navigate('documents')" class="nav-link flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-100 rounded-lg font-medium">
+                    <i data-lucide="files" class="w-5 h-5 mr-3 text-slate-500"></i>
+                    <span>書類管理</span>
+                </a>
+                <a href="#" onclick="navigate('settings')" class="nav-link flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-100 rounded-lg font-medium">
+                    <i data-lucide="settings" class="w-5 h-5 mr-3 text-slate-500"></i>
+                    <span>設定</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-200">
+                <div class="flex items-center">
+                    <img src="https://placehold.co/40x40/E0E7FF/4F46E5?text=Y" alt="User Avatar" class="w-10 h-10 rounded-full">
+                    <div class="ml-3">
+                        <p class="font-semibold">山田 太郎</p>
+                        <p class="text-sm text-slate-500">Taro.Yamada@email.com</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto">
+            <!-- Home Panel -->
+            <div id="home-panel" class="content-panel active fade-in p-8">
+                <h2 class="text-3xl font-bold mb-2">ホーム</h2>
+                <p class="text-slate-500 mb-8">ようこそ、山田さん。あなたの活動状況の概要です。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 col-span-1 md:col-span-2">
+                        <h3 class="font-semibold text-lg mb-4">クイックスタート</h3>
+                        <div class="flex items-center p-4 bg-indigo-50 rounded-lg">
+                            <div class="bg-white p-3 rounded-lg shadow-sm">
+                                <i data-lucide="file-plus-2" class="w-8 h-8 text-indigo-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-semibold text-slate-800">新しい応募書類を作成しましょう</p>
+                                <p class="text-slate-500 text-sm">テンプレートを使って、すぐに履歴書やESを作成できます。</p>
+                                <button onclick="navigate('document-edit')" class="mt-2 text-sm font-semibold text-indigo-600 hover:underline">今すぐ作成 →</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200">
+                        <h3 class="font-semibold text-lg mb-4">管理中の書類</h3>
+                        <div class="text-center">
+                            <p class="text-6xl font-bold text-indigo-600">3</p>
+                            <p class="text-slate-500">件</p>
+                            <button onclick="navigate('documents')" class="mt-4 w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                                一覧を見る
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 bg-white p-6 rounded-xl border border-slate-200">
+                    <h3 class="text-lg font-semibold mb-4">最近編集した書類</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 rounded-lg hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="navigate('document-detail')">
+                            <p class="font-medium">A株式会社 応募用履歴書</p>
+                            <p class="text-sm text-slate-500">最終更新: 2日前</p>
+                        </div>
+                        <div class="p-3 rounded-lg hover:bg-slate-50 flex justify-between items-center cursor-pointer" onclick="navigate('document-detail')">
+                            <p class="font-medium">B製作所 ES (技術職)</p>
+                            <p class="text-sm text-slate-500">最終更新: 5日前</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents Panel -->
+            <div id="documents-panel" class="content-panel fade-in p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold">書類管理</h2>
+                        <p class="text-slate-500 mt-1">応募書類を一元管理します。</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex items-center justify-center py-2 px-4 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors shadow-sm font-semibold">
+                            <i data-lucide="upload-cloud" class="mr-2 text-indigo-600 h-5 w-5"></i>
+                            <span>アップロード</span>
+                        </button>
+                        <button onclick="navigate('document-edit')" class="flex items-center justify-center py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold">
+                            <i data-lucide="file-plus-2" class="mr-2 h-5 w-5"></i>
+                            <span>新規作成</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-sm text-slate-500">
+                            <tr>
+                                <th class="p-4 font-medium">書類タイトル</th>
+                                <th class="p-4 font-medium">種類</th>
+                                <th class="p-4 font-medium">最終更新日</th>
+                                <th class="p-4 font-medium"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-200 hover:bg-slate-50">
+                                <td class="p-4 font-semibold">A株式会社 応募用履歴書</td>
+                                <td class="p-4 text-slate-600"><span class="bg-sky-100 text-sky-700 text-xs font-bold px-2 py-1 rounded-full">履歴書</span></td>
+                                <td class="p-4 text-slate-600">2日前</td>
+                                <td class="p-4 text-right"><button onclick="navigate('document-detail')" class="text-indigo-600 font-semibold text-sm hover:underline">詳細</button></td>
+                            </tr>
+                            <tr class="border-b border-slate-200 hover:bg-slate-50">
+                                <td class="p-4 font-semibold">B製作所 ES (技術職)</td>
+                                <td class="p-4 text-slate-600"><span class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-1 rounded-full">ES</span></td>
+                                <td class="p-4 text-slate-600">5日前</td>
+                                <td class="p-4 text-right"><button onclick="navigate('document-detail')" class="text-indigo-600 font-semibold text-sm hover:underline">詳細</button></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-semibold">職務経歴書 (汎用)</td>
+                                <td class="p-4 text-slate-600"><span class="bg-slate-200 text-slate-700 text-xs font-bold px-2 py-1 rounded-full">職務経歴書</span></td>
+                                <td class="p-4 text-slate-600">1週間前</td>
+                                <td class="p-4 text-right"><button onclick="navigate('document-detail')" class="text-indigo-600 font-semibold text-sm hover:underline">詳細</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Document Detail Panel -->
+            <div id="document-detail-panel" class="content-panel fade-in p-8">
+                <button onclick="navigate('documents')" class="flex items-center text-sm font-semibold text-slate-600 hover:text-indigo-600 mb-4">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                    <span>書類管理へ戻る</span>
+                </button>
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold">A株式会社 応募用履歴書</h2>
+                        <p class="text-slate-500 mt-1">プレビュー</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="flex items-center justify-center py-2 px-4 bg-white border border-slate-300 rounded-lg hover:bg-slate-100 transition-colors shadow-sm font-semibold">
+                            <i data-lucide="download" class="mr-2 h-5 w-5"></i><span>ダウンロード</span>
+                        </button>
+                        <button onclick="navigate('document-edit')" class="flex items-center justify-center py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold">
+                            <i data-lucide="edit" class="mr-2 h-5 w-5"></i><span>編集する</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg border border-slate-200 h-[70vh] overflow-y-auto">
+                    <!-- Preview content from previous mock -->
+                    <h2 class="text-center font-bold text-2xl mb-6">履歴書</h2>
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div class="col-span-2"><p class="text-sm">ふりがな</p><p class="text-lg">やまだ たろう</p></div>
+                        <div class="row-span-2"><div class="w-24 h-32 bg-slate-200 border flex items-center justify-center"><span class="text-sm text-slate-500">写真</span></div></div>
+                        <div class="col-span-2"><p class="text-sm">氏名</p><p class="text-2xl font-bold">山田 太郎</p></div>
+                    </div>
+                    <hr class="my-4"><p class="font-bold mb-2">職務経歴</p><p class="text-slate-700 leading-relaxed">2015年4月 株式会社〇〇に入社。営業部に配属され、法人向けにITソリューションの提案営業を行う。...</p><p class="text-slate-400 my-8 text-center">(プレビュー内容が続きます)</p>
+                </div>
+            </div>
+
+            <!-- Document Edit Panel -->
+            <div id="document-edit-panel" class="content-panel fade-in p-8">
+                <button onclick="navigate('documents')" class="flex items-center text-sm font-semibold text-slate-600 hover:text-indigo-600 mb-4">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                    <span>キャンセル</span>
+                </button>
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold">書類の作成・編集</h2>
+                        <p class="text-slate-500 mt-1">内容を入力または編集してください。</p>
+                    </div>
+                        <button onclick="navigate('document-detail')" class="py-2 px-5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold">保存</button>
+                </div>
+                <div class="bg-white p-8 rounded-xl border border-slate-200 space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">書類タイトル</label>
+                        <input type="text" value="A株式会社 応募用履歴書" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">学歴・職歴</label>
+                        <textarea rows="5" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="2015年4月 株式会社〇〇 入社..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">自己PR</label>
+                        <div class="relative">
+                            <textarea rows="8" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="私の強みは..."></textarea>
+                            <button class="absolute bottom-3 right-3 bg-slate-100 text-indigo-700 text-xs font-semibold py-1.5 px-3 rounded-full hover:bg-slate-200 flex items-center"><i data-lucide="archive" class="w-3.5 h-3.5 mr-1.5"></i>保存済みパーツを引用</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Panel -->
+            <div id="settings-panel" class="content-panel fade-in p-8">
+                <h2 class="text-3xl font-bold mb-6">設定</h2>
+                <div class="max-w-2xl space-y-8">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold border-b pb-3 mb-4">アカウント情報</h3>
+                        <div class="space-y-4">
+                            <div><label class="font-medium text-slate-600">氏名</label><p>山田 太郎</p></div>
+                            <div><label class="font-medium text-slate-600">メールアドレス</label><p>Taro.Yamada@email.com</p></div>
+                            <button class="text-sm font-semibold text-indigo-600 hover:underline">アカウント情報を変更</button>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold border-b pb-3 mb-4">その他</h3>
+                        <div class="divide-y">
+                            <a href="#" class="py-3 flex justify-between items-center hover:bg-slate-50 -mx-6 px-6"><span>利用規約</span><i data-lucide="chevron-right" class="text-slate-400"></i></a>
+                            <a href="#" class="py-3 flex justify-between items-center hover:bg-slate-50 -mx-6 px-6"><span>プライバシーポリシー</span><i data-lucide="chevron-right" class="text-slate-400"></i></a>
+                            <a href="#" class="py-3 flex justify-between items-center text-red-600 hover:bg-red-50 -mx-6 px-6"><span>ログアウト</span><i data-lucide="log-out"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentPanels = document.querySelectorAll('.content-panel');
+
+        function navigate(panelId) {
+            // Map simple names to panel IDs
+            const panelMap = {
+                'home': 'home-panel',
+                'documents': 'documents-panel',
+                'settings': 'settings-panel',
+                'document-detail': 'document-detail-panel',
+                'document-edit': 'document-edit-panel',
+            };
+            const targetPanelId = panelMap[panelId] || panelId;
+
+            contentPanels.forEach(panel => {
+                panel.classList.remove('active', 'fade-in');
+            });
+            const targetPanel = document.getElementById(targetPanelId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+                setTimeout(() => targetPanel.classList.add('fade-in'), 10);
+                window.scrollTo(0, 0);
+            }
+
+            // Update nav link styles if it's a main navigation item
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'bg-indigo-50', 'text-slate-700', 'font-semibold');
+                link.classList.add('text-slate-600');
+                if (link.getAttribute('onclick').includes(`'${panelId}'`)) {
+                    link.classList.add('active', 'bg-indigo-50', 'text-slate-700', 'font-semibold');
+                    link.classList.remove('text-slate-600');
+                }
+            });
+        }
+        
+        lucide.createIcons();
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            navigate('home');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Django 5.0+ requires Python 3.10+
+# Using Django 4.2 LTS for Python 3.8 compatibility
+Django==4.2.25
+
+# Development dependencies
+python-dotenv==1.0.0
+
+# Testing
+pytest==7.4.0
+pytest-django==4.7.0
+
+# Code quality
+flake8==6.1.0
+black==23.9.1
+
+# Optional: Database (uncomment if needed)
+# psycopg2-binary==2.9.9  # PostgreSQL
+# mysqlclient==2.2.0      # MySQL
+
+# Optional: REST API (uncomment if needed)
+# djangorestframework==3.14.0
+# django-cors-headers==4.3.1
+
+# Optional: Additional tools (uncomment if needed)
+# django-environ==0.11.2
+# celery==5.3.4

@@ -1,0 +1,24 @@
+{
+  "name": "challecara_app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Challenge Cara Application - Python Backend with HTML/CSS/JavaScript Frontend",
+  "author": "Koshiro Yamada",
+  "license": "MIT",
+  "scripts": {
+    "start": "python app.py",
+    "dev": "python3 app.py",
+    "build": "echo 'No build step required for static frontend'",
+    "lint:js": "eslint static/js/**/*.js",
+    "format": "prettier --write static/js/**/*.js static/css/**/*.css",
+    "serve": "python -m http.server 8000"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "python": ">=3.8.0"
+  }
+}
