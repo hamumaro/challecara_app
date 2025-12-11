@@ -37,6 +37,12 @@ def settings_view(request):
     """
     return render(request, 'settings.html')
 
+def syuukatu_view(request):
+    """
+    Syuukatu data view
+    """
+    return render(request, 'syuukatudata.html')
+
 
 # Legacy view for backward compatibility
 def index(request):

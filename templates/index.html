@@ -58,6 +58,10 @@
                     <i data-lucide="files" class="w-5 h-5 mr-3 text-slate-500"></i>
                     <span>書類管理</span>
                 </a>
+                <a href="#" onclick="navigate('syuukatudata')" class="nav-link flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-100 rounded-lg font-medium">
+                    <i data-lucide="briefcase" class="w-5 h-5 mr-3 text-slate-500"></i>
+                    <span>マイバッチコレクション</span>
+                </a>
                 <a href="#" onclick="navigate('settings')" class="nav-link flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-100 rounded-lg font-medium">
                     <i data-lucide="settings" class="w-5 h-5 mr-3 text-slate-500"></i>
                     <span>設定</span>
@@ -270,6 +274,7 @@
             const panelMap = {
                 'home': 'home-panel',
                 'documents': 'documents-panel',
+                'syuukatudata': 'syuukatudata-panel',
                 'settings': 'settings-panel',
                 'document-detail': 'document-detail-panel',
                 'document-edit': 'document-edit-panel',
