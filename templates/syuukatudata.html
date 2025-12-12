@@ -1,69 +1,69 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>マイバッジコレクション - Job-Quest Badge</title>
-    <link rel="stylesheet" href="test.css">
-</head>
-<body>
-    <header class="header">
-        <h1>🏆 マイバッジコレクション</h1>
-        <p>あなたの就職活動での頑張りの証です。</p>
-    </header>
+{% extends 'base.html' %}
+{% load static %}
 
-    <main class="main-content">
-        <section class="summary-card">
-            <div class="summary-item">
-                <span class="summary-value">12</span>
-                <span class="summary-label">総獲得バッジ数</span>
-            </div>
-            <div class="summary-item">
-                <span class="summary-value">5</span>
-                <span class="summary-label">企業から高評価バッジ</span>
-            </div>
-        </section>
+{% block title %}マイバッジコレクション - 集いしもの達{% endblock %}
 
-        <section class="badge-list-section">
-            <h2>🏢 獲得企業一覧</h2>
+{% block content %}
+<div class="p-8 fade-in">
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold mb-2">🏆 マイバッジコレクション</h2>
+        <p class="text-slate-500">あなたの就職活動での頑張りの証です。</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
+            <div>
+                <p class="text-sm text-slate-500 font-medium mb-1">総獲得バッジ数</p>
+                <p class="text-4xl font-bold text-indigo-600">{{ total_badges }}</p>
+            </div>
+            <div class="p-4 bg-indigo-50 rounded-full">
+                <i data-lucide="award" class="w-8 h-8 text-indigo-600"></i>
+            </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
+            <div>
+                <p class="text-sm text-slate-500 font-medium mb-1">企業から高評価バッジ</p>
+                <p class="text-4xl font-bold text-amber-500">{{ high_rating_count }}</p>
+            </div>
+            <div class="p-4 bg-amber-50 rounded-full">
+                <i data-lucide="star" class="w-8 h-8 text-amber-500"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="space-y-8">
+        <h3 class="text-xl font-bold text-slate-700 border-b border-slate-200 pb-2">獲得企業一覧</h3>
+
+        {% for company in company_data %}
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+            <div class="flex items-center mb-6">
+                <div class="w-1 h-8 bg-{{ company.color }}-500 rounded-full mr-3"></div>
+                <h4 class="text-lg font-bold text-slate-800">{{ company.name }}</h4>
+            </div>
             
-            <div class="company-badge-group">
-                <h3>株式会社イノベーションテック</h3>
-                <div class="badge-grid">
-                    <div class="badge-item">
-                        <div class="badge-icon" style="background-color: #091398;">
-                            <img src="https://via.placeholder.com/60/ffffff?text=IT" alt="ITテックのロゴ" aria-label="ITテック インターンシップバッジ">
-                        </div>
-                        <p class="badge-name">長期インターン完遂</p>
-                        <span class="badge-date">2025/11/01 獲得</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {% for badge in company.badges %}
+                <div class="group relative bg-slate-50 rounded-xl p-4 border border-slate-100 hover:bg-white hover:shadow-md hover:border-slate-200 transition-all cursor-pointer text-center">
+                    
+                    <div class="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center shadow-md text-white font-bold text-sm"
+                         style="background-color: {{ badge.bg_color }}; color: {% if badge.bg_color == '#ffc107' %}black{% else %}white{% endif %};">
+                        {{ badge.short_name }}
                     </div>
-                    <div class="badge-item">
-                        <div class="badge-icon" style="background-color: #38b48b;">
-                            <img src="https://via.placeholder.com/60/ffffff?text=W" alt="ITテックのロゴ" aria-label="ITテック ワークショップバッジ">
-                        </div>
-                        <p class="badge-name">課題解決ワークショップ</p>
-                        <span class="badge-date">2025/10/05 獲得</span>
-                    </div>
+                    
+                    <p class="font-bold text-slate-800 text-sm mb-1 group-hover:text-indigo-600 transition-colors">
+                        {{ badge.title }}
+                        {% if badge.is_high_rating %}
+                        <span class="text-amber-500">★</span>
+                        {% endif %}
+                    </p>
+                    <span class="text-xs text-slate-400">{{ badge.date }}</span>
                 </div>
+                {% endfor %}
             </div>
+        </div>
+        {% endfor %}
 
-            <div class="company-badge-group">
-                <h3>未来クリエイト株式会社</h3>
-                <div class="badge-grid">
-                    <div class="badge-item">
-                        <div class="badge-icon" style="background-color: #ffc107;">
-                            <img src="https://via.placeholder.com/60/000000?text=FC" alt="未来クリエイトのロゴ" aria-label="未来クリエイト 説明会バッジ">
-                        </div>
-                        <p class="badge-name">会社説明会参加</p>
-                        <span class="badge-date">2025/09/15 獲得</span>
-                    </div>
-                </div>
-            </div>
-            </section>
-    </main>
-
-    <footer class="footer">
-        <p>&copy; Job-Quest Badge 2025</p>
-    </footer>
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}

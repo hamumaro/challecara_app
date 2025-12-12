@@ -10,6 +10,7 @@ urlpatterns = [
     path('documents/detail/', views.document_detail, name='document_detail'),
     path('documents/edit/', views.document_edit, name='document_edit'),
     path('settings/', views.settings_view, name='settings'),
+    path('syuukatudata/', views.syuukatudata_view, name='syuukatudata'),
 
     # Legacy support
     path('index/', views.index, name='index'),

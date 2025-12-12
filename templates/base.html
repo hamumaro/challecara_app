@@ -49,6 +49,10 @@
                     <i data-lucide="files" class="w-5 h-5 mr-3 {% if 'document' in request.resolver_match.url_name %}text-indigo-600{% else %}text-slate-500{% endif %}"></i>
                     <span>書類管理</span>
                 </a>
+                <a href="{% url 'main:syuukatudata' %}" class="nav-link {% if request.resolver_match.url_name == 'syuukatudata' %}active{% endif %} flex items-center px-4 py-2.5 {% if request.resolver_match.url_name == 'syuukatudata' %}text-slate-700 bg-indigo-50 font-semibold{% else %}text-slate-600 hover:bg-slate-100 font-medium{% endif %} rounded-lg">
+                    <i data-lucide="award" class="w-5 h-5 mr-3 {% if request.resolver_match.url_name == 'syuukatudata' %}text-indigo-600{% else %}text-slate-500{% endif %}"></i>
+                    <span>バッジコレクション</span>
+                </a>
                 <a href="{% url 'main:settings' %}" class="nav-link {% if request.resolver_match.url_name == 'settings' %}active{% endif %} flex items-center px-4 py-2.5 {% if request.resolver_match.url_name == 'settings' %}text-slate-700 bg-indigo-50 font-semibold{% else %}text-slate-600 hover:bg-slate-100 font-medium{% endif %} rounded-lg">
                     <i data-lucide="settings" class="w-5 h-5 mr-3 {% if request.resolver_match.url_name == 'settings' %}text-indigo-600{% else %}text-slate-500{% endif %}"></i>
                     <span>設定</span>
